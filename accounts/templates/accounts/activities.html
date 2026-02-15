@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities - ScholarSys+</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Top Navigation Bar -->
+        <nav class="topbar">
+            <div class="topbar-content">
+                <h1 class="topbar-brand">SCHOLARSYS+</h1>
+                <div class="topbar-menu hidden-mobile">
+                    <a href="{% url 'dashboard' %}" class="topbar-link">Dashboard</a>
+                    <a href="{% url 'grades' %}" class="topbar-link">Grades</a>
+                    <a href="{% url 'messages' %}" class="topbar-link">Messages</a>
+                    <a href="{% url 'logout' %}" class="topbar-link logout-link">Logout</a>
+                </div>
+                <button class="topbar-toggle mobile-only" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="main-wrapper">
+            <!-- Sidebar -->
+            {% include 'accounts/_sidebar.html' %}
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="page-header">
+                    <h2>Your Activities</h2>
+                    <p>Manage and track your assignments and tasks</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>All Activities</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if activities %}
+                        <div class="activities-full-list">
+                            {% for act in activities %}
+                            <div class="activity-full">
+                                <div class="activity-icon badge-{{ act.status|lower }}"><i class="fas fa-bookmark"></i></div>
+                                <div class="activity-details">
+                                    <h4>{{ act.name }}</h4>
+                                    <p>Subject: <strong>{{ act.subject|default:"N/A" }}</strong></p>
+                                </div>
+                                <div class="activity-meta">
+                                    <p><strong>Due:</strong> {{ act.deadline }}</p>
+                                    <span class="badge badge-{{ act.status|lower }}">{{ act.status }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted">No activities yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

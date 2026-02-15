@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ScholarSys+ Register</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="register-card">
+        <h1 class="title">SCHOLARSYS+</h1>
+        <p class="subtitle">Join us as a teacher or student</p>
+
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+
+            <label>I am a</label>
+            <div class="role-select">
+                <button type="button" class="role-btn active">Student</button>
+                <button type="button" class="role-btn">Teacher</button>
+            </div>
+
+            <label>Username</label>
+            <input type="text" name="username" placeholder="johndoe" required>
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="you@example.com" required>
+
+            <label>First Name</label>
+            <input type="text" name="first_name" placeholder="John" required>
+
+            <label>Last Name</label>
+            <input type="text" name="last_name" placeholder="Doe" required>
+
+            <label>Major</label>
+            <input type="text" name="major" placeholder="Bachelor in Information Systems" required>
+
+            <label>Student ID</label>
+            <input type="text" name="student_id" placeholder="0461-1" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="••••••••" required>
+
+            <label>Confirm Password</label>
+            <input type="password" name="confirm_password" placeholder="••••••••" required>
+
+            <button type="submit" class="create-btn">Create Account</button>
+        </form>
+
+        <p class="signin">
+            Already have an account? <a href="{% url 'login' %}">Sign In</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

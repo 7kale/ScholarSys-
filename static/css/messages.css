@@ -1,0 +1,179 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #c7d6f0, #9fb6d9);
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* ===================== */
+/* Navbar */
+/* ===================== */
+.navbar {
+    background: linear-gradient(to right, #2a3f66, #1f2e4a);
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.navbar a { 
+    color: #9ec5ff; 
+    text-decoration: none; 
+    font-weight: bold;
+    transition: 0.3s;
+}
+.navbar a:hover { color: white; }
+
+/* ===================== */
+/* Messages Container */
+/* ===================== */
+.messages-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 20px;
+}
+
+/* ===================== */
+/* Teacher List (Sidebar) */
+/* ===================== */
+.teacher-list {
+    flex: 1;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.teacher-list h3 {
+    margin-bottom: 15px;
+    color: #2a3f66;
+    font-size: 18px;
+}
+
+.teacher-list ul { list-style: none; padding: 0; }
+.teacher-list li {
+    padding: 12px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.teacher-list li:hover { 
+    background: #e6f0ff; 
+    transform: translateX(5px);
+}
+
+/* ===================== */
+/* Chat Area */
+/* ===================== */
+.chat-area {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.chat-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    background: #f0f4ff;
+    font-weight: bold;
+    color: #2a3f66;
+}
+
+.chat-messages {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Scrollbar style */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #2a3f66;
+    border-radius: 4px;
+}
+
+/* ===================== */
+/* Chat Bubbles */
+/* ===================== */
+.chat-bubble {
+    padding: 12px 18px;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.chat-bubble.student {
+    background: #2a3f66;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+
+.chat-bubble.teacher {
+    background: #e6e6e6;
+    color: #2a3f66;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
+
+/* ===================== */
+/* Chat Input */
+/* ===================== */
+.chat-input { 
+    display: flex; 
+    padding: 15px 20px; 
+    gap: 10px; 
+    border-top: 1px solid #ddd; 
+    background: #f9f9f9;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.3s;
+}
+.chat-input input:focus {
+    border-color: #2a3f66;
+}
+
+.chat-input button {
+    padding: 12px 20px;
+    border-radius: 20px;
+    border: none;
+    background: #2a3f66;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.chat-input button:hover {
+    background: #3b5ca8;
+    transform: translateY(-2px);
+}
+
+/* ===================== */
+/* Responsive */
+/* ===================== */
+@media (max-width: 768px) {
+    .messages-container {
+        flex-direction: column;
+    }
+    .teacher-list, .chat-area {
+        flex: 1 1 100%;
+    }
+}

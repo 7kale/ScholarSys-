@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scores - ScholarSys+</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Top Navigation Bar -->
+        <nav class="topbar">
+            <div class="topbar-content">
+                <h1 class="topbar-brand">SCHOLARSYS+</h1>
+                <div class="topbar-menu hidden-mobile">
+                    <a href="{% url 'dashboard' %}" class="topbar-link">Dashboard</a>
+                    <a href="{% url 'grades' %}" class="topbar-link">Grades</a>
+                    <a href="{% url 'activities' %}" class="topbar-link">Activities</a>
+                    <a href="{% url 'logout' %}" class="topbar-link logout-link">Logout</a>
+                </div>
+                <button class="topbar-toggle mobile-only" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="main-wrapper">
+            <!-- Sidebar -->
+            {% include 'accounts/_sidebar.html' %}
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="page-header">
+                    <h2>Quiz & Exam Scores</h2>
+                    <p>Your assessment scores and results</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Test Scores</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="scores-list">
+                            {% for score in scores %}
+                            <div class="score-item">
+                                <span class="score-type badge badge-{{ score.type|lower }}">
+                                    <i class="fas fa-{% if score.type == 'Quiz' %}question-circle{% else %}file-alt{% endif %}"></i> {{ score.type }}
+                                </span>
+                                <div class="score-info">
+                                    <h4>{{ score.title }}</h4>
+                                    <p>{{ score.subject }}</p>
+                                </div>
+                                <div class="score-result">
+                                    <div class="score-value">{{ score.score }}/{{ score.total }}</div>
+                                    <p style="font-size: 12px; color: var(--text-muted);">{{ score.date }}</p>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p class="text-muted">No scores available yet.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{% load static %}
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand hidden-desktop">
+        <h2>SCHOLARSYS+</h2>
+    </div>
+
+    {# compact profile summary (small profile pill) #}
+    {% if full_name %}
+    <div class="sidebar-profile" style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:12px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;">{{ full_name|slice:":2"|upper }}</div>
+        <div style="flex:1;">
+            <div style="font-weight:600">{{ full_name }}</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.6)">ID: {{ student_id }}</div>
+        </div>
+        <a href="{% url 'profile' %}" style="color:#111827;padding:6px 8px;border-radius:6px;background:#e6e7e9;text-decoration:none;font-size:12px;">Profile</a>
+    </div>
+    {% endif %}
+
+    <nav class="sidebar-nav">
+        <a href="{% url 'dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="{% url 'profile' %}" class="nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+            <i class="fas fa-user-circle"></i>
+            <span>Profile</span>
+        </a>
+        <a href="{% url 'dashboard' %}#grades-section" id="grades" class="nav-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Grades</span>
+        </a>
+        <a href="{% url 'dashboard' %}#subjects-section" class="nav-item">
+            <i class="fas fa-book"></i>
+            <span>Subjects</span>
+        </a>
+        <a href="{% url 'dashboard' %}#messages-section" id="messages" class="nav-item">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="{% url 'dashboard' %}#activities-section" class="nav-item">
+            <i class="fas fa-list-check"></i>
+            <span>Activities</span>
+        </a>
+        <a href="{% url 'dashboard' %}#deadlines-section" class="nav-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Deadlines</span>
+        </a>
+        <a href="{% url 'dashboard' %}#scores-section" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            <span>Quiz & Exam Scores</span>
+        </a>
+        <a href="{% url 'dashboard' %}#attendance-section" id="attendance" class="nav-item">
+            <i class="fas fa-user-check"></i>
+            <span>Attendance</span>
+        </a>
+    </nav>
+
+    <a href="{% url 'logout' %}" class="nav-logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+    </a>
+</aside>
+
+<!-- Overlay for mobile sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>

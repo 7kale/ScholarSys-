@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grades - ScholarSys+</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Top Navigation Bar -->
+        <nav class="topbar">
+            <div class="topbar-content">
+                <h1 class="topbar-brand">SCHOLARSYS+</h1>
+                <div class="topbar-menu hidden-mobile">
+                    <a href="{% url 'dashboard' %}" class="topbar-link">Dashboard</a>
+                    <a href="{% url 'messages' %}" class="topbar-link">Messages</a>
+                    <a href="{% url 'logout' %}" class="topbar-link logout-link">Logout</a>
+                </div>
+                <button class="topbar-toggle mobile-only" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="main-wrapper">
+            <!-- Sidebar -->
+            {% include 'accounts/_sidebar.html' %}
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="page-header">
+                    <h2>My Grades</h2>
+                    <p>Overview of your academic performance</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Grade Report</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="grades-table">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Credits</th>
+                                    <th>Grade</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in grades %}
+                                <tr>
+                                    <td>{{ course.name }}</td>
+                                    <td>{{ course.credits }}</td>
+                                    <td>{{ course.grade }}</td>
+                                    <td>
+                                        <span class="badge {% if course.status == 'Passed' %}badge-passed{% elif course.status == 'Failed' %}badge-missing{% else %}badge-ongoing{% endif %}">
+                                            {{ course.status }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4">No grades available.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

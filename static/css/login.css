@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #2b9aff 0%, #8a5bff 60%, #7c5eff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center wrapper */
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Card */
+.login-card {
+    width: 420px;
+    padding: 40px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #0b1320 0%, #111827 100%);
+    box-shadow: 0 20px 60px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    color: white;
+}
+
+.title {
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #9aaed8;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: none;
+    background: #f3f6fb;
+    font-size: 14px;
+}
+
+.password-box {
+    position: relative;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.options a {
+    text-decoration: none;
+    color: #9ec5ff;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #3b5ca8;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    filter: brightness(1.05);
+}
+
+.signup {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.signup a {
+    color: #9ec5ff;
+    text-decoration: none;
+    font-weight: bold;
+}

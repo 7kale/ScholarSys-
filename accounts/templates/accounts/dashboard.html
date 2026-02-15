@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarSys+ Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Top Navigation Bar -->
+        <nav class="topbar">
+            <div class="topbar-content">
+                <h1 class="topbar-brand">SCHOLARSYS+</h1>
+                
+                <div class="topbar-menu hidden-mobile">
+                    <a href="#" class="topbar-link" onclick="document.getElementById('grades').click(); return false;">Grades</a>
+                    <a href="#" class="topbar-link" onclick="document.getElementById('messages').click(); return false;">Messages</a>
+                    <a href="#" class="topbar-link" onclick="document.getElementById('attendance').click(); return false;">Attendance</a>
+                    <a href="{% url 'logout' %}" class="topbar-link logout-link">Logout</a>
+                </div>
+
+                <button class="topbar-toggle mobile-only" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="main-wrapper">
+            <!-- Sidebar -->
+            {% include 'accounts/_sidebar.html' %}
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Overview Section -->
+                <section class="content-section active" id="overview">
+                    <div class="page-header">
+                        <h2>Academic Overview</h2>
+                        <p>Academic Year 2025-2026 | Second Semester</p>
+                    </div>
+
+                    {# profile overview card removed - profile is shown in sidebar only #}
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="stat-label">GPA</div>
+                            <div class="stat-value">3.70</div>
+                            <div class="stat-desc">Overall Grade Point Average</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                            <div class="stat-label">Attendance</div>
+                            <div class="stat-value">94%</div>
+                            <div class="stat-desc">Class Attendance Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-list-check"></i></div>
+                            <div class="stat-label">Pending</div>
+                            <div class="stat-value">4</div>
+                            <div class="stat-desc">Outstanding Assignments</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-comment-dots"></i></div>
+                            <div class="stat-label">Messages</div>
+                            <div class="stat-value">4</div>
+                            <div class="stat-desc">Faculty Communications</div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2col">
+                        <!-- Recent Activities -->
+                        <div class="card">
+                            <div class="card-header"><h3>Recent Activities</h3></div>
+                            <div class="card-body activity-list">
+                                <div class="activity-item">
+                                    <div><p class="activity-title">Math Assignment Chapter 5</p><p class="activity-sub">Mathematics • Due Feb 16, 2026</p></div>
+                                    <span class="badge badge-ongoing">ONGOING</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div><p class="activity-title">Physics Lab Report</p><p class="activity-sub">Physics • Due Feb 14, 2026</p></div>
+                                    <span class="badge badge-missing">MISSING</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div><p class="activity-title">Literature Essay</p><p class="activity-sub">English • Due Feb 13, 2026</p></div>
+                                    <span class="badge badge-completed">COMPLETED</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Faculty Messages -->
+                        <div class="card">
+                            <div class="card-header"><h3>Faculty Messages</h3></div>
+                            <div class="card-body message-list">
+                                <div class="message-item">
+                                    <div class="avatar">SJ</div>
+                                    <div><p class="message-name">Dr. Sarah Johnson</p><p class="message-subject">Mathematics</p><p class="message-text">Great work on your last assignment!</p></div>
+                                    <span class="message-time">2h ago</span>
+                                </div>
+                                <div class="message-item">
+                                    <div class="avatar">MC</div>
+                                    <div><p class="message-name">Prof. Michael Chen</p><p class="message-subject">Physics</p><p class="message-text">Please review the lab report guidelines.</p></div>
+                                    <span class="message-time">5h ago</span>
+                                </div>
+                                <div class="message-item">
+                                    <div class="avatar">ER</div>
+                                    <div><p class="message-name">Ms. Emily Rodriguez</p><p class="message-subject">English Literature</p><p class="message-text">Essay deadline extended to Friday.</p></div>
+                                    <span class="message-time">1d ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Tiles -->
+                    <div class="card">
+                        <div class="card-header"><h3>Current Semester Performance</h3></div>
+                        <div class="card-body"><div class="perf-grid">
+                            <div class="perf-tile"><div class="perf-label">MATHEMATICS</div><div class="perf-grade">A</div><div class="perf-percent">92%</div></div>
+                            <div class="perf-tile"><div class="perf-label">PHYSICS</div><div class="perf-grade">B+</div><div class="perf-percent">87%</div></div>
+                            <div class="perf-tile"><div class="perf-label">CHEMISTRY</div><div class="perf-grade">A-</div><div class="perf-percent">90%</div></div>
+                            <div class="perf-tile"><div class="perf-label">ENGLISH LIT</div><div class="perf-grade">A</div><div class="perf-percent">95%</div></div>
+                            <div class="perf-tile"><div class="perf-label">HISTORY</div><div class="perf-grade">B</div><div class="perf-percent">83%</div></div>
+                        </div></div>
+                    </div>
+                </section>
+
+                <!-- Grades Section -->
+                <section class="content-section" id="grades-section">
+                    <h2 class="section-title">Grades</h2>
+                    <div class="grade-filters">
+                        <select class="filter-select"><option>2025-2026</option><option>2024-2025</option><option>2023-2024</option></select>
+                        <select class="filter-select"><option>Both Semesters</option><option>1st Semester</option><option>2nd Semester</option></select>
+                    </div>
+                    <div class="card"><table class="grades-table"><thead><tr><th>Subject</th><th>Credits</th><th>Score</th><th>Grade</th></tr></thead><tbody>
+                        <tr><td>Mathematics</td><td class="text-center">3</td><td class="text-center">92</td><td class="text-center"><strong>A</strong></td></tr>
+                        <tr><td>Physics</td><td class="text-center">4</td><td class="text-center">87</td><td class="text-center"><strong>B+</strong></td></tr>
+                        <tr><td>Chemistry</td><td class="text-center">3</td><td class="text-center">90</td><td class="text-center"><strong>A-</strong></td></tr>
+                        <tr><td>English Literature</td><td class="text-center">3</td><td class="text-center">95</td><td class="text-center"><strong>A</strong></td></tr>
+                        <tr><td>History</td><td class="text-center">3</td><td class="text-center">83</td><td class="text-center"><strong>B</strong></td></tr>
+                    </tbody></table></div>
+                </section>
+
+                <!-- Subjects Section -->
+                <section class="content-section" id="subjects-section">
+                    <h2 class="section-title">Subjects</h2>
+                    <div class="subjects-grid">
+                        <div class="card subject-card"><h3>Mathematics</h3><div class="subject-info"><p><i class="fas fa-user"></i> Dr. Sarah Johnson</p><p><i class="fas fa-clock"></i> Mon, Wed, Fri 9:00 AM</p><p><i class="fas fa-door-open"></i> Room 301</p></div></div>
+                        <div class="card subject-card"><h3>Physics</h3><div class="subject-info"><p><i class="fas fa-user"></i> Prof. Michael Chen</p><p><i class="fas fa-clock"></i> Tue, Thu 10:30 AM</p><p><i class="fas fa-door-open"></i> Lab 205</p></div></div>
+                        <div class="card subject-card"><h3>Chemistry</h3><div class="subject-info"><p><i class="fas fa-user"></i> Dr. James Williams</p><p><i class="fas fa-clock"></i> Mon, Wed 2:00 PM</p><p><i class="fas fa-door-open"></i> Lab 108</p></div></div>
+                        <div class="card subject-card"><h3>English Literature</h3><div class="subject-info"><p><i class="fas fa-user"></i> Ms. Emily Rodriguez</p><p><i class="fas fa-clock"></i> Tue, Thu 1:00 PM</p><p><i class="fas fa-door-open"></i> Room 412</p></div></div>
+                        <div class="card subject-card"><h3>History</h3><div class="subject-info"><p><i class="fas fa-user"></i> Prof. David Martinez</p><p><i class="fas fa-clock"></i> Fri 11:00 AM</p><p><i class="fas fa-door-open"></i> Room 203</p></div></div>
+                    </div>
+                </section>
+
+                <!-- Messages Section -->
+                <section class="content-section" id="messages-section">
+                    <h2 class="section-title">Teacher Messages</h2>
+                    <div class="messages-grid">
+                        <div class="card teacher-card"><div class="teacher-avatar">SJ</div><h3>Dr. Sarah Johnson</h3><p class="teacher-subject">Mathematics</p><p class="teacher-message">Great work on your last assignment!</p><p class="teacher-time">2h ago</p></div>
+                        <div class="card teacher-card"><div class="teacher-avatar">MC</div><h3>Prof. Michael Chen</h3><p class="teacher-subject">Physics</p><p class="teacher-message">Please review the lab report guidelines.</p><p class="teacher-time">5h ago</p></div>
+                        <div class="card teacher-card"><div class="teacher-avatar">ER</div><h3>Ms. Emily Rodriguez</h3><p class="teacher-subject">English Literature</p><p class="teacher-message">Essay deadline extended to Friday.</p><p class="teacher-time">1d ago</p></div>
+                        <div class="card teacher-card"><div class="teacher-avatar">JW</div><h3>Dr. James Williams</h3><p class="teacher-subject">Chemistry</p><p class="teacher-message">Quiz scheduled for next week.</p><p class="teacher-time">2d ago</p></div>
+                    </div>
+                </section>
+
+                <!-- Activities Section -->
+                <section class="content-section" id="activities-section">
+                    <h2 class="section-title">Activities</h2>
+                    <div class="card"><div class="activities-full-list">
+                        <div class="activity-full"><div class="activity-icon badge-ongoing"><i class="fas fa-clock"></i></div><div class="activity-details"><h4>Math Assignment Chapter 5</h4><p>Mathematics</p></div><div class="activity-meta"><p>Feb 16, 2026</p><span class="badge badge-ongoing">ongoing</span></div></div>
+                        <div class="activity-full"><div class="activity-icon badge-missing"><i class="fas fa-times-circle"></i></div><div class="activity-details"><h4>Physics Lab Report</h4><p>Physics</p></div><div class="activity-meta"><p>Feb 14, 2026</p><span class="badge badge-missing">missing</span></div></div>
+                        <div class="activity-full"><div class="activity-icon badge-completed"><i class="fas fa-check-circle"></i></div><div class="activity-details"><h4>Literature Essay</h4><p>English</p></div><div class="activity-meta"><p>Feb 13, 2026</p><span class="badge badge-completed">completed</span></div></div>
+                        <div class="activity-full"><div class="activity-icon badge-ongoing"><i class="fas fa-clock"></i></div><div class="activity-details"><h4>Chemistry Problem Set</h4><p>Chemistry</p></div><div class="activity-meta"><p>Feb 18, 2026</p><span class="badge badge-ongoing">ongoing</span></div></div>
+                        <div class="activity-full"><div class="activity-icon badge-missing"><i class="fas fa-times-circle"></i></div><div class="activity-details"><h4>History Research Paper</h4><p>History</p></div><div class="activity-meta"><p>Feb 15, 2026</p><span class="badge badge-missing">missing</span></div></div>
+                    </div></div>
+                </section>
+
+                <!-- Deadlines Section -->
+                <section class="content-section" id="deadlines-section">
+                    <h2 class="section-title">Deadlines</h2>
+                    <div class="deadlines-grid">
+                        <div class="card"><h3 class="deadline-type missing">Missing</h3>
+                            <div class="deadline-item"><p>Physics Lab Report</p><p class="text-muted">Physics</p></div>
+                            <div class="deadline-item"><p>History Research Paper</p><p class="text-muted">History</p></div>
+                        </div>
+                        <div class="card"><h3 class="deadline-type ongoing">Ongoing</h3>
+                            <div class="deadline-item"><p>Math Assignment Chapter 5</p><p class="text-muted">Mathematics</p></div>
+                            <div class="deadline-item"><p>Chemistry Problem Set</p><p class="text-muted">Chemistry</p></div>
+                        </div>
+                        <div class="card"><h3 class="deadline-type completed">Completed</h3>
+                            <div class="deadline-item"><p>Literature Essay</p><p class="text-muted">English</p></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Scores Section -->
+                <section class="content-section" id="scores-section">
+                    <h2 class="section-title">Quiz & Exam Scores</h2>
+                    <div class="card"><div class="scores-list">
+                        <div class="score-item"><div class="score-type badge-quiz">QUIZ</div><div class="score-info"><h4>Quiz 3</h4><p>Mathematics</p></div><div class="score-result"><p class="score-value">18/20</p><p class="text-muted">Feb 10, 2026</p></div></div>
+                        <div class="score-item"><div class="score-type badge-exam">EXAM</div><div class="score-info"><h4>Midterm Exam</h4><p>Physics</p></div><div class="score-result"><p class="score-value">85/100</p><p class="text-muted">Feb 08, 2026</p></div></div>
+                        <div class="score-item"><div class="score-type badge-quiz">QUIZ</div><div class="score-info"><h4>Quiz 2</h4><p>Chemistry</p></div><div class="score-result"><p class="score-value">15/15</p><p class="text-muted">Feb 12, 2026</p></div></div>
+                        <div class="score-item"><div class="score-type badge-exam">EXAM</div><div class="score-info"><h4>Essay Exam</h4><p>English</p></div><div class="score-result"><p class="score-value">92/100</p><p class="text-muted">Feb 05, 2026</p></div></div>
+                    </div></div>
+                </section>
+
+                <!-- Attendance Section -->
+                <section class="content-section" id="attendance-section">
+                    <h2 class="section-title">Attendance</h2>
+                    <div class="card"><div class="attendance-list">
+                        <div class="attendance-item"><div class="attendance-icon badge-present"><i class="fas fa-check-circle"></i></div><div class="attendance-info"><p>Mathematics</p><p class="text-muted">Feb 14, 2026</p></div><span class="badge badge-present">present</span></div>
+                        <div class="attendance-item"><div class="attendance-icon badge-present"><i class="fas fa-check-circle"></i></div><div class="attendance-info"><p>Physics</p><p class="text-muted">Feb 14, 2026</p></div><span class="badge badge-present">present</span></div>
+                        <div class="attendance-item"><div class="attendance-icon badge-late"><i class="fas fa-clock"></i></div><div class="attendance-info"><p>Chemistry</p><p class="text-muted">Feb 13, 2026</p></div><span class="badge badge-late">late</span></div>
+                        <div class="attendance-item"><div class="attendance-icon badge-present"><i class="fas fa-check-circle"></i></div><div class="attendance-info"><p>English</p><p class="text-muted">Feb 13, 2026</p></div><span class="badge badge-present">present</span></div>
+                        <div class="attendance-item"><div class="attendance-icon badge-absent"><i class="fas fa-times-circle"></i></div><div class="attendance-info"><p>History</p><p class="text-muted">Feb 12, 2026</p></div><span class="badge badge-absent">absent</span></div>
+                    </div></div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function setActiveSection(sectionId, clickedEl) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+            if (sectionId === 'overview') {
+                var overviewEl = document.getElementById('overview');
+                if (overviewEl) overviewEl.classList.add('active');
+            } else {
+                var sec = document.getElementById(sectionId + '-section');
+                if (sec) sec.classList.add('active');
+            }
+
+            var activeNav = null;
+            if (clickedEl) activeNav = clickedEl;
+            if (!activeNav) {
+                var navs = document.querySelectorAll('.nav-item');
+                navs.forEach(function(n) {
+                    var href = n.getAttribute('href') || '';
+                    var targetHash = '#' + (sectionId === 'overview' ? 'overview' : sectionId + '-section');
+                    if (href.indexOf(targetHash) !== -1 || n.id === sectionId) {
+                        activeNav = n;
+                    }
+                });
+            }
+            if (activeNav) activeNav.classList.add('active');
+
+            closeSidebar();
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('visible');
+        }
+
+        function closeSidebar() {
+            var sb = document.getElementById('sidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+            if (sb) sb.classList.remove('open');
+            if (overlay) overlay.classList.remove('visible');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (location.hash) {
+                var hash = location.hash.replace('#','');
+                var sectionId = hash.endsWith('-section') ? hash.replace('-section','') : hash;
+                setActiveSection(sectionId);
+                var target = document.getElementById(hash);
+                if (target) target.scrollIntoView();
+            }
+        });
+
+        window.addEventListener('hashchange', function() {
+            if (location.hash) {
+                var hash = location.hash.replace('#','');
+                var sectionId = hash.endsWith('-section') ? hash.replace('-section','') : hash;
+                setActiveSection(sectionId);
+            }
+        });
+    </script>
+</body>
+</html>

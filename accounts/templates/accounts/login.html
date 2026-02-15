@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ScholarSys+ Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="login-card">
+        <h1 class="title">SCHOLARSYS+</h1>
+        <p class="subtitle">Sign in to your account</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter your username" required>
+
+            <label>Password</label>
+            <div class="password-box">
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="options">
+                <div>
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <p class="signup">
+            Don't have an account? <a href="{% url 'register' %}">Sign up</a>
+        </p>
+
+        <!-- Display Django messages -->
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

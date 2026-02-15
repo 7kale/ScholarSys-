@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - ScholarSys+</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        {% include 'accounts/_sidebar.html' %}
+
+        <div class="main-wrapper">
+            <main class="main-content">
+                {% if user.is_authenticated %}
+                    
+                    <div class="page-header-with-buttons">
+                        <div>
+                            <h2>Profile Details</h2>
+                            <p>Manage your academic and personal information</p>
+                        </div>
+                        <div class="header-buttons">
+                            <a href="{% url 'profile_edit' %}" class="btn btn-primary">
+                                <i class="fas fa-edit"></i> Edit Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="profile-header-card-figma">
+                        <div class="profile-header-content">
+                            <div class="avatar-circle-large">
+                                {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+                            </div>
+                            <div class="header-name-section">
+                                <h1 style="font-size: 28px; margin-bottom: 8px;">{{ full_name }}</h1>
+                                <div class="major-badge">
+                                    <i class="fas fa-graduation-cap"></i> {{ major|default:"Student" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-cards-grid">
+                        
+                        <div class="info-card-figma">
+                            <div class="card-header-figma">
+                                <i class="far fa-user"></i>
+                                <h3>Personal Information</h3>
+                            </div>
+                            <div class="card-body-figma">
+                                <div class="form-group-figma">
+                                    <span class="label-figma">Email Address</span>
+                                    <input type="text" class="form-input" value="{{ email }}" readonly>
+                                </div>
+                                <div class="form-group-figma">
+                                    <span class="label-figma">Phone Number</span>
+                                    <input type="text" class="form-input" value="{{ phone_number|default:'Not provided' }}" readonly>
+                                </div>
+                                <div class="form-group-figma">
+                                    <span class="label-figma">Account Status</span>
+                                    <div>
+                                        <span class="badge badge-completed">Active</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-card-figma">
+                            <div class="card-header-figma">
+                                <i class="fas fa-university"></i>
+                                <h3>Academic Details</h3>
+                            </div>
+                            <div class="card-body-figma">
+                                <div class="form-group-figma">
+                                    <span class="label-figma">Student ID</span>
+                                    <input type="text" class="form-input" value="{{ student_id }}" readonly>
+                                </div>
+                                <div class="form-group-figma">
+                                    <span class="label-figma">Department</span>
+                                    <input type="text" class="form-input" value="{{ department|default:'General Education' }}" readonly>
+                                </div>
+                                <div class="form-group-figma">
+                                    <span class="label-figma">Enrollment Date</span>
+                                    <input type="text" class="form-input" value="August 15, 2022" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% else %}
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p class="text-muted">You are not logged in.</p>
+                            <a href="{% url 'login' %}" class="btn btn-primary" style="margin-top: 15px;">Login here</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
